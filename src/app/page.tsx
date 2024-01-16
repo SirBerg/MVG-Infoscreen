@@ -1,12 +1,11 @@
 "use server";
 
-import { getStations, Station } from "@/lib/stations";
+import {getStations, Station} from "@/lib/stations";
 import { StationUrl } from "@/components/stationUrl";
-
+import UserAlert from "@/components/userAlert";
 export default async function Page() {
   try {
-    const stations = await getStations();
-
+    const stations:Station[] = await getStations();
     return (
       <>
         Select a station:
@@ -16,8 +15,7 @@ export default async function Page() {
   } catch (e: any) {
     return (
       <>
-        <div>Could not load stations.</div>
-        <div>{e.message}</div>
+        <UserAlert message={e.message}></UserAlert>
       </>
     );
   }
